@@ -1,0 +1,22 @@
+html {
+    font-size: 18px
+}
+
+body {
+    background-color: #0a658cb9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1
+}
+
+.content {
+    background-color: rgb(237, 224, 155);
+    padding:3rem 3rem;
+}
+
+.dataTable {
+    width: 30rem;
+    height: 15rem;
+    text-align: center
+}

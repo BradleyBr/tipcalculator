@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="./resources/css/reset.css" type="text/css" rel="stylesheet">
+        <link href="./resources/css/style.css" type="text/css" rel="stylesheet">
+        <title>Tip Calculator</title>
+    </head>
+    <body>
+        <header>
+            <h1>Tip Calculator</h1>
+        </header>
+        <div class="content">
+            <table class="dataTable">
+                <tr>
+                    <th>Tips Earned</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="tips"></td>
+                </tr>
+
+                <tr>
+                    <th>Cooks working at old Moby</th>
+                    <th>Cooks working at new Moby</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="cooksOld"></td>
+                    <td><input type="text" id="cooksNew"></td>
+                </tr>
+
+                <tr>
+                    <th>Dishwashers Working</th>
+                    <th>Tip-Percent</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="dishwashers"></td>
+                    <td><input type="text" id="dishtip" value="10"></td>
+                </tr>
+                
+                <tr>
+                    <th>Front-house working at old Moby</th>  
+                    <th>Front-house working at new Moby</th>  
+                </tr>
+                <tr>
+                    <td><input type="text" id="serversOld"></td>
+                    <td><input type="text" id="serversNew"></td>
+                </tr>
+            </table>
+            <button id="splitTips">calculate</button>
+                <p id="tipOutput"></p>
+        </div>
+    
+        
+        
+    </body>
+    <script src="./resources/js/main.js" type="text/javascript"></script>
+</html>
