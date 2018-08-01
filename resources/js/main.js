@@ -2,8 +2,7 @@
 const tipElement = document.getElementById('tips')
 const cooksOldElement = document.getElementById('cooksOld')
 const cooksNewElement = document.getElementById('cooksNew')
-const serversOldElement = document.getElementById('serversOld')
-const serversNewElement = document.getElementById('serversNew')
+const serversElement = document.getElementById('servers')
 const dishwasherElement = document.getElementById('dishwashers')
 const dishwasherTipElement = document.getElementById('dishtip')
 
@@ -13,8 +12,7 @@ let oldCooks = 0
 let newCooks = 0
 let dishwasher = 0
 let dishTipPercent = 0.1
-let oldServers = 0
-let newServers = 0
+let servers = 0
 
 tipElement.addEventListener('blur', function (tips) {
     tipInput =  Number(tips.target.value)
@@ -41,45 +39,79 @@ dishwasherTipElement.addEventListener('blur', function(num) {
     console.log(`dish tip percent: ${dishTipPercent}`)
 })
 
-serversOldElement.addEventListener('blur', function (num) {
-    oldServers = Number(num.target.value)
-    console.log(`old servers: ${oldServers}`)
+serversElement.addEventListener('blur', function (num) {
+    servers = Number(num.target.value)
+    console.log(`servers: ${servers}`)
 })
 
-serversNewElement.addEventListener('blur', function (num) {
-    newServers = Number(num.target.value)
-    console.log(`new servers: ${newServers}`)
+ // function to floor to the 2nd decimal place
+ const convertString = function (num) {
+    numString = num.toFixed(3).toString()
+    console.log(numString)
+    numString = numString.slice(0, numString.indexOf('.') + 3)
+    console.log(numString)
+    return Number(numString)
+}
+
+// button event to calculate the waitress tipout
+
+let calculateWaitressTips = document.getElementById('waitresstipbutton')
+calculateWaitressTips.addEventListener('click', function () {
+    const waitressOutput = document.getElementById('waitresstipout')
+    let halfTips = tipInput / 2
+    let serverTips = halfTips / servers
+    serverTips = convertString(serverTips)
+    waitressOutput.textContent = ''
+    if (servers === 0) {
+        waitressOutput.textContent = 'Please enter the amount of waitstaff working'
+    } else if ( servers < 0) {
+        waitressOutput.textContent = 'Please enter a positive number for waitstaff'
+    } else if (halfTips < 0) {
+        waitressOutput.textContent = 'Please enter a positive tip number'
+    } else if (!halfTips) {
+        waitressOutput.textContent = 'Please remove any symbols from the fields'
+    } else {
+        waitressOutput.textContent = `The waitstaff earned $${serverTips} in tips`
+    }
 })
 
-// button event to calculate tips split and return 3 pools of tips, cooks, servers and the dishwasher
-let calculateTips = document.getElementById('splitTips')
+
+
+
+
+// button event to calculate tips split and return for cooks and dishwashers
+let calculateTips = document.getElementById('kitchentips')
 calculateTips.addEventListener('click', function () {
     let totalCooks = oldCooks + newCooks
-    let totalServers = oldServers + newServers
-    let output = document.getElementById('tipOutput')
+    let output = document.getElementById('kitchentipoutput')
     let halfTips = tipInput / 2
     let cookGrossTips = halfTips / (oldCooks + newCooks)
     let dishwasherTips = 0;
+    let cookNetTips = 0;
     if (dishwasher !== 0) {
         dishwasherTips = (cookGrossTips * oldCooks) * dishTipPercent
+        cookNetTips = halfTips - (dishwasherTips * dishwasher)
+    } else {
+        cookNetTips = halfTips
     }
-    let cookNetTips = halfTips - dishwasherTips
-    let cookDividedTips = cookNetTips / totalCooks
-    let serverTips = halfTips / totalServers
-   
-    // function to floor to the 2nd decimal place
-    let convertString = function (num) {
-        numString = num.toFixed(3).toString()
-        console.log(numString)
-        numString = numString.slice(0, numString.indexOf('.') + 3)
-        console.log(numString)
-        return Number(numString)
-    }
+    let cookDividedTips = cookNetTips / totalCooks   
 
     cookDividedTips = convertString(cookDividedTips)
-    serverTips = convertString(serverTips)
     dishwasherTips = convertString(dishwasherTips)
     output.textContent = ''
-    output.textContent = `Cooks earned $${cookDividedTips.toFixed(2)}.
-    Dishwasher earned $${dishwasherTips.toFixed(2)}. Servers earned $${serverTips.toFixed(2)}`
+    if (totalCooks === 0) {
+        output.textContent = 'Please enter the amount of cooks working'
+    } else if (totalCooks < 0) {
+        output.textContent = 'Please enter a positive number for kitchenstaff'
+    } else if (halfTips < 0) {
+        output.textContent = 'Please enter a positive number for tips'
+    } else if (dishTipPercent <= 0) {
+        output.textContent = 'Please enter a number greater than 0 for dishwasher tip percent'
+    } else if (!halfTips) {
+        output.textContent = 'Please remove any symbols from the fields'
+    } else if (!dishTipPercent) {
+        output.textContent = 'Please remove any symbols from the fields'
+    } else {
+        output.textContent = `The cooks earned $${cookDividedTips} in tips. The dishwashers earned $${dishwasherTips} in tips`
+    }
 })

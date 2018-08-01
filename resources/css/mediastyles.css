@@ -1,0 +1,124 @@
+@media only screen and (min-width: 992px) and (max-width: 1489px) {
+    header {
+        background-size: 100% 100%;
+    }
+
+    .content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 1180px) {
+    header {
+        background-size: 100% 100%;
+    }
+
+    header h1 {
+        font-size: 3rem;
+    }
+
+    header h2 {
+        font-size: 2.3rem;
+    }
+
+    header h1, header h2 {
+        left: 2rem;
+        top: 5rem;
+    }
+
+    .datatable {
+        width: 25rem;
+    }
+    .flexcontainer {
+        flex-direction: column;
+    }
+
+    .offsetleft {
+        margin-left: 0;
+    }
+
+    .flexleft {
+        margin-right: auto;
+    }
+}
+
+@media only screen and (max-width: 842px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    header h2 {
+        font-size: 1.8rem;
+    }
+
+    header h1, header h2 {
+        width: 25rem;
+    }
+
+    .content {
+        width: 26rem;
+    }
+}
+
+@media only screen and (max-width: 562px) {
+    header h1, header h2 {
+        width: 15rem;
+    }
+
+    .content {
+        width: 20rem;
+    }
+
+    .datatable {
+        width: 19rem;
+    }
+
+    .content p {
+        font-size: 1rem;
+    }
+   
+    .parentcontainer {
+        padding-left: 1rem;
+    }
+
+    .kitchenstaff h2, .fronthouse h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+
+    .content {
+        width: 15rem;
+    }
+
+    .content p {
+        font-size: 0.9rem;
+    }
+    
+    .datatable {
+        width: 14rem;
+    }
+
+    .specialmargin {
+        margin-left: 5rem;
+    }
+
+}
+
+@media only screen and (max-width: 328px) {
+    .fronthouse h2, .kitchenstaff h2 {
+        font-size: 1.5rem;
+    }
+    .content {
+        padding-left: 1rem;
+        width: 15rem;
+    }
+
+    .content p {
+        font-size: .9rem;
+    }
+
+    .specialmargin {
+        margin-left: 6.5rem;
+    }
+}

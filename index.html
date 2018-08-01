@@ -1,56 +1,78 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tip Calculator</title>
         <link href="./resources/css/reset.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Eczar|Lato" rel="stylesheet">
         <link href="./resources/css/style.css" type="text/css" rel="stylesheet">
+        <link href="./resources/css/mediastyles.css" type="text/css" rel="stylesheet">
+        
         <title>Tip Calculator</title>
     </head>
     <body>
         <header>
-            <h1>Tip Calculator</h1>
+            <h1>Moby Dick Restaurant</h1>
+            <h2>Tip Calculator</h2>
         </header>
-        <div class="content">
-            <table class="dataTable">
-                <tr>
-                    <th>Tips Earned</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="tips"></td>
-                </tr>
 
-                <tr>
-                    <th>Cooks working at old Moby</th>
-                    <th>Cooks working at new Moby</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="cooksOld"></td>
-                    <td><input type="text" id="cooksNew"></td>
-                </tr>
-
-                <tr>
-                    <th>Dishwashers Working</th>
-                    <th>Tip-Percent</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="dishwashers"></td>
-                    <td><input type="text" id="dishtip" value="10"></td>
-                </tr>
-                
-                <tr>
-                    <th>Front-house working at old Moby</th>  
-                    <th>Front-house working at new Moby</th>  
-                </tr>
-                <tr>
-                    <td><input type="text" id="serversOld"></td>
-                    <td><input type="text" id="serversNew"></td>
-                </tr>
-            </table>
-            <button id="splitTips">calculate</button>
-                <p id="tipOutput"></p>
-        </div>
-    
-        
-        
+        <div class="parentcontainer">
+            <div class="content">
+                <!-- All the flex classes throughout the DOM are for keeping everything lined up with eachother -->
+                <div class="datatable">
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Tips Earned</p>
+                        <input type="text" id="tips" class="flexright specialmargin">
+                    </div>
+                </div>
+                <div class="fronthouse">
+                    <h2>Fronthouse staff</h2>
+                    <div class="datatable">
+                        <div class="flexcolumn">
+                            <div class="boxmargin">
+                                <p class="flexleft">Number of waitstaff working</p>
+                                <input type="text" id="servers" class="flexright">
+                            </div>
+                        </div>
+                        
+                        <button id="waitresstipbutton" class="waittipbutton">Tipout</button>
+                        <p id="waitresstipout" class="waitressoutput"></p>
+                    </div>
+                    
+                </div>  
+                <div class="kitchenstaff">
+                    <h2>Kitchen Staff</h2>
+                    <div class="datatable flexcontainer">
+                        <div class="flexcolumn">
+                            <!-- the boxmargin classes are for justifying the content to be at the edge of the container-->
+                            <div class="boxmargin">
+                                <p class="flexleft">Cooks working at old Moby</p>
+                                <input type="text" id="cooksOld" class="flexright">      
+                            </div>
+                            <div class="boxmargin">
+                                <p class="flexleft">Cooks working at new Moby</p> 
+                                <input type="text" id="cooksNew" class="flexright">
+                            </div>
+                        </div>
+                        <div class="flexcolumn offsetleft">
+                            <div class="boxmargin">
+                                <p class="flexleft">Number of dishwashers</p>
+                                <input type="text" id="dishwashers" class="flexright">
+                            </div>
+                            <div class="boxmargin">
+                                <p class="flexleft">Diswasher tipout percent</p>
+                                <input type="text" id="dishtip" class="flexright" value="10">
+                            </div>   
+                        </div>
+                    </div>
+                </div>  
+                <div class="outputcontainer">
+                    <button id="kitchentips">calculate</button>
+                    <p id="kitchentipoutput"></p>
+                </div>            
+            </div>
+        </div> 
     </body>
     <script src="./resources/js/main.js" type="text/javascript"></script>
 </html>
