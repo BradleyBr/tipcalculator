@@ -86,6 +86,9 @@
 }
 
 @media only screen and (max-width: 420px) {
+    header {
+        height: 150px;
+    }
     header h1 {
         font-size: 2rem;
     }
@@ -98,9 +101,13 @@
         top: 1.8rem;
     }
 
+    .parentcontainer {
+        padding-left: 0.4rem;
+    }
+
     .content {
         width: 17rem;
-        height: 90%;
+        height: 600px;
         padding-top: 0.5rem;
     }
 
