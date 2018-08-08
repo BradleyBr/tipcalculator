@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tip Calculator</title>
         <link href="./resources/css/reset.css" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Eczar|Lato" rel="stylesheet">
         <link href="./resources/css/style.css" type="text/css" rel="stylesheet">
         <link href="./resources/css/mediastyles.css" type="text/css" rel="stylesheet">
@@ -22,8 +24,13 @@
                 <!-- All the flex classes throughout the DOM are for keeping everything lined up with eachother -->
                 <div class="datatable">
                     <div class="boxmargin bodyheader">
-                        <p class="flexleft">Tips Earned</p>
+                        <p class="flexleft tipsfieldname">Tips Earned</p>
                         <input type="number" pattern="[0-9]*" id="tips" class="flexright specialmargin">
+                        <table id="tipnumbers">
+                            <tr>
+                                <td id="tipsum"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div class="fronthouse">
@@ -36,7 +43,7 @@
                             </div>
                         </div>
                         
-                        <button id="waitresstipbutton" class="waittipbutton">Tipout</button>
+                        <!-- <button id="waitresstipbutton" class="waittipbutton">Tipout</button> -->
                         <p id="waitresstipout" class="waitressoutput"></p>
                     </div>
                     
@@ -47,12 +54,12 @@
                         <div class="flexcolumn">
                             <!-- the boxmargin classes are for justifying the content to be at the edge of the container-->
                             <div class="boxmargin">
-                                <p class="flexleft">Cooks working at old Moby</p>
-                                <input type="number" pattern="[0-9]*" id="cooksOld" class="flexright">      
+                                <p class="flexleft">Number of Cooks Working</p>
+                                <input type="number" pattern="[0-9]*" id="cooks" class="flexright">      
                             </div>
                             <div class="boxmargin">
-                                <p class="flexleft">Cooks working at new Moby</p> 
-                                <input type="number" pattern="[0-9]*" id="cooksNew" class="flexright">
+                                <p class="flexleft">Cooks included in dishwasher Tip Out</p> 
+                                <input type="number" pattern="[0-9]*" id="cooksdishtip" class="flexright">
                             </div>
                         </div>
                         <div class="flexcolumn offsetleft">
@@ -68,8 +75,8 @@
                     </div>
                 </div>  
                 <div class="outputcontainer">
-                    <button id="kitchentips">calculate</button>
-                    <p id="kitchentipoutput"></p>
+                    <button id="stafftips">calculate</button>
+                    <p id="tipoutput"></p>
                 </div>            
             </div>
         </div> 

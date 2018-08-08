@@ -1,32 +1,37 @@
 // set up of const variables to access the DOM
 const tipElement = document.getElementById('tips')
-const cooksOldElement = document.getElementById('cooksOld')
-const cooksNewElement = document.getElementById('cooksNew')
+const cooksElement = document.getElementById('cooks')
+const dishCooksElement = document.getElementById('cooksdishtip')
 const serversElement = document.getElementById('servers')
 const dishwasherElement = document.getElementById('dishwashers')
 const dishwasherTipElement = document.getElementById('dishtip')
+const tipTotalElement = document.getElementById('tipsum')
 
 // variable assignment and event listeners for input fields from the DOM
 let tipInput = 0
-let oldCooks = 0
-let newCooks = 0
+let cooks = 0
+let dishCooks = 0
 let dishwasher = 0
 let dishTipPercent = 0.1
 let servers = 0
+let tipSum = 0
+
+// display tip table sum at the start of the DOM load up
+tipTotalElement.textContent = tipSum
 
 tipElement.addEventListener('blur', function (tips) {
     tipInput =  Number(tips.target.value)
     console.log(`tips: ${tipInput}`)
 })
 
-cooksOldElement.addEventListener('blur', function(num) {
-    oldCooks = Number(num.target.value)
-    console.log(`old cooks: ${oldCooks}`)
+cooksElement.addEventListener('blur', function(num) {
+    cooks = Number(num.target.value)
+    console.log(`old cooks: ${cooks}`)
 })
 
-cooksNewElement.addEventListener('blur', function(num) {
-    newCooks = Number(num.target.value)
-    console.log(`new cooks:${newCooks}`)
+dishCooksElement.addEventListener('blur', function(num) {
+    dishCooks = Number(num.target.value)
+    console.log(`new cooks:${dishCooks}`)
 })
 
 dishwasherElement.addEventListener('blur', function(num) {
@@ -44,6 +49,37 @@ serversElement.addEventListener('blur', function (num) {
     console.log(`servers: ${servers}`)
 })
 
+// function to add individual tip numbers to a table list on the DOM, and to be able to remove them
+tipElement.addEventListener('keydown', function(event) {
+    if(event.keyCode === 13) {
+        document.getElementById('tipnumbers').insertAdjacentHTML('afterbegin', `<tr><td>${event.target.value}<i id="cleartips" class="fas fa-times"></i></td></tr>`)
+        tipSum += Number(event.target.value)
+        tipTotalElement.textContent = convertString(tipSum)
+        let clearTipValue = document.getElementById('cleartips')
+        clearTipValue.addEventListener('click', function() {
+            tipSum -= Number(clearTipValue.parentNode.textContent)
+            tipTotalElement.textContent = convertString(tipSum)
+            clearTipValue.parentNode.parentNode.parentNode.parentNode.removeChild(clearTipValue.parentNode.parentNode.parentNode)
+        })
+        tipElement.value = ''
+    }
+})
+
+// function for input fields to let the enter key, or enter on the number pad for phones, to move off the field
+const inputlistener = function (inputElement) {
+    inputElement.addEventListener('keydown', function(event) {
+        if(event.keyCode === 13) {
+            this.blur()
+        }
+    })
+}
+
+inputlistener(cooksElement)
+inputlistener(dishCooksElement)
+inputlistener(serversElement)
+inputlistener(dishwasherElement)
+inputlistener(dishwasherTipElement)
+
  // function to floor to the 2nd decimal place
  const convertString = function (num) {
     numString = num.toFixed(3).toString()
@@ -53,65 +89,44 @@ serversElement.addEventListener('blur', function (num) {
     return Number(numString)
 }
 
-// button event to calculate the waitress tipout
 
-let calculateWaitressTips = document.getElementById('waitresstipbutton')
-calculateWaitressTips.addEventListener('click', function () {
-    const waitressOutput = document.getElementById('waitresstipout')
-    let halfTips = tipInput / 2
-    let serverTips = halfTips / servers
-    serverTips = convertString(serverTips)
-    waitressOutput.textContent = ''
-    if (servers === 0) {
-        waitressOutput.textContent = 'Please enter the amount of waitstaff working'
-    } else if ( servers < 0) {
-        waitressOutput.textContent = 'Please enter a positive number for waitstaff'
-    } else if (halfTips < 0) {
-        waitressOutput.textContent = 'Please enter a positive tip number'
-    } else if (!halfTips) {
-        waitressOutput.textContent = 'Please remove any symbols from the fields'
+
+// click event for computing tips, taking the input fields and outputing tips for frontstaff, cooks and dishwashers
+document.getElementById('stafftips').addEventListener('click', function () {
+    let combinedStaff = servers + cooks
+    let earnedTips = tipSum / combinedStaff
+    let dishCookCombined = earnedTips * dishCooks
+    let dishTipOutGross = dishCookCombined * dishTipPercent
+    let dishTipOutNet = dishTipOutGross * dishwasher
+    let cookTipsGross = earnedTips * cooks
+    let cookTipsNet = cookTipsGross - dishTipOutNet
+    let cookTipsDivided = cookTipsNet / cooks
+    earnedTips = convertString(earnedTips)
+    cookTipsDivided = convertString(cookTipsDivided)
+    dishTipOutNet = convertString(dishTipOutNet)
+    output = document.getElementById('tipoutput')
+    output.innerHTML = ''
+    if (cooks === 0 && servers === 0 && tipSum === 0) {
+        output.innerHTML = 'Please enter information into the fields' 
+    } else if (cooks === 0) {
+        output.innerHTML = 'Please enter the amount of cooks working'
+    } else if (cooks < 0) {
+        output.innerHTML = 'Please enter a positive number for kitchen staff'
+    } else if (servers === 0) {
+        output.innerHTML = 'Please enter the amount of waitstaff working'
+    } else if (servers < 0) {
+        output.innerHTML = 'Please enter a positive number of waitsaff'
+    } else if (earnedTips === 0) {
+        output.innerHTML = 'Please enter the amount of tips earned'
+    } else if (earnedTips < 0) {
+        output.innerHTML = 'Please enter a positive number of tips earned'
+    } else if (dishwasher === 0 ) {
+        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips}
+                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided}`
     } else {
-        waitressOutput.textContent = `The waitstaff earned $${serverTips} in tips`
+        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips}
+                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided}
+                        </br></br>For the dishwashers: ${dishwasher} pile(s) of $${dishTipOutNet / dishwasher}`
     }
 })
 
-
-
-
-
-// button event to calculate tips split and return for cooks and dishwashers
-let calculateTips = document.getElementById('kitchentips')
-calculateTips.addEventListener('click', function () {
-    let totalCooks = oldCooks + newCooks
-    let output = document.getElementById('kitchentipoutput')
-    let halfTips = tipInput / 2
-    let cookGrossTips = halfTips / (oldCooks + newCooks)
-    let dishwasherTips = 0;
-    let cookNetTips = 0;
-    if (dishwasher !== 0) {
-        dishwasherTips = (cookGrossTips * oldCooks) * dishTipPercent
-        cookNetTips = halfTips - (dishwasherTips * dishwasher)
-    } else {
-        cookNetTips = halfTips
-    }
-    let cookDividedTips = cookNetTips / totalCooks   
-
-    cookDividedTips = convertString(cookDividedTips)
-    dishwasherTips = convertString(dishwasherTips)
-    output.textContent = ''
-    if (totalCooks === 0) {
-        output.textContent = 'Please enter the amount of cooks working'
-    } else if (totalCooks < 0) {
-        output.textContent = 'Please enter a positive number for kitchenstaff'
-    } else if (halfTips < 0) {
-        output.textContent = 'Please enter a positive number for tips'
-    } else if (dishTipPercent <= 0) {
-        output.textContent = 'Please enter a number greater than 0 for dishwasher tip percent'
-    } else if (!halfTips) {
-        output.textContent = 'Please remove any symbols from the fields'
-    } else if (!dishTipPercent) {
-        output.textContent = 'Please remove any symbols from the fields'
-    } else {
-        output.textContent = `The cooks earned $${cookDividedTips} in tips. The dishwashers earned $${dishwasherTips} in tips`
-    }
-})

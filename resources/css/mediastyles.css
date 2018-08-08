@@ -66,6 +66,7 @@
 
     .content {
         width: 20rem;
+        min-height: 400px;
     }
 
     .datatable {
@@ -82,6 +83,10 @@
 
     .kitchenstaff h2, .fronthouse h2 {
         font-size: 1.5rem;
+    }
+
+    .specialmargin {
+        margin-left: 0.3rem;
     }
 }
 
@@ -107,7 +112,6 @@
 
     .content {
         width: 17rem;
-        height: 600px;
         padding-top: 0.5rem;
     }
 
@@ -127,14 +131,11 @@
         width: 14rem;
     }
 
-    .specialmargin {
-        margin-left: 5rem;
-    }
+   
 
     .outputcontainer {
         top: 0;
     }
-
 }
 
 @media only screen and (max-width: 328px) {
