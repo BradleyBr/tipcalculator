@@ -21,7 +21,6 @@ tipTotalElement.textContent = tipSum
 
 tipElement.addEventListener('blur', function (tips) {
     tipInput =  Number(tips.target.value)
-    console.log(`tips: ${tipInput}`)
 })
 
 cooksElement.addEventListener('blur', function(num) {
@@ -52,9 +51,10 @@ serversElement.addEventListener('blur', function (num) {
 // function to add individual tip numbers to a table list on the DOM, and to be able to remove them
 tipElement.addEventListener('keydown', function(event) {
     if(event.keyCode === 13) {
-        document.getElementById('tipnumbers').insertAdjacentHTML('afterbegin', `<tr><td>${event.target.value}<i id="cleartips" class="fas fa-times"></i></td></tr>`)
+       console.log(Number(event.target.value).toFixed(2))
+        document.getElementById('tipnumbers').insertAdjacentHTML('afterbegin', `<tr><td>${Number(event.target.value).toFixed(2)}<i id="cleartips" class="fas fa-times"></i></td></tr>`)
         tipSum += Number(event.target.value)
-        tipTotalElement.textContent = convertString(tipSum)
+        tipTotalElement.textContent = convertString(tipSum).toFixed(2)
         let clearTipValue = document.getElementById('cleartips')
         clearTipValue.addEventListener('click', function() {
             tipSum -= Number(clearTipValue.parentNode.textContent)
@@ -82,10 +82,8 @@ inputlistener(dishwasherTipElement)
 
  // function to floor to the 2nd decimal place
  const convertString = function (num) {
-    numString = num.toFixed(3).toString()
-    console.log(numString)
+    let numString = num.toFixed(3).toString()
     numString = numString.slice(0, numString.indexOf('.') + 3)
-    console.log(numString)
     return Number(numString)
 }
 
@@ -121,12 +119,12 @@ document.getElementById('stafftips').addEventListener('click', function () {
     } else if (earnedTips < 0) {
         output.innerHTML = 'Please enter a positive number of tips earned'
     } else if (dishwasher === 0 ) {
-        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips}
-                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided}`
+        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips.toFixed(2)}
+                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided.toFixed(2)}`
     } else {
-        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips}
-                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided}
-                        </br></br>For the dishwashers: ${dishwasher} pile(s) of $${dishTipOutNet / dishwasher}`
+        output.innerHTML = `For the front staff: ${servers} piles of $${earnedTips.toFixed(2)}
+                        </br></br>For the cooks: ${cooks} piles of $${cookTipsDivided.toFixed(2)}
+                        </br></br>For the dishwashers: ${dishwasher} pile(s) of $${(dishTipOutNet / dishwasher).toFixed(2)}`
     }
 })
 
