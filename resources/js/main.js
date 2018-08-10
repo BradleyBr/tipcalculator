@@ -48,13 +48,18 @@ serversElement.addEventListener('blur', function (num) {
     console.log(`servers: ${servers}`)
 })
 
+let truncateToDecimals = function (num, dec = 2) {
+    const calcDec = Math.pow(10, 2)
+    return Math.trunc(num * calcDec) / calcDec
+}
+
 // function to add individual tip numbers to a table list on the DOM, and to be able to remove them
 tipElement.addEventListener('keydown', function(event) {
     if(event.keyCode === 13) {
        console.log(Number(event.target.value).toFixed(2))
-        document.getElementById('tipnumbers').insertAdjacentHTML('afterbegin', `<tr><td>${Number(event.target.value).toFixed(2)}<i id="cleartips" class="fas fa-times"></i></td></tr>`)
-        tipSum += Number(event.target.value)
-        tipTotalElement.textContent = convertString(tipSum).toFixed(2)
+        document.getElementById('tipnumbers').insertAdjacentHTML('afterbegin', `<tr><td>${truncateToDecimals(Number(event.target.value)).toFixed(2)}<i id="cleartips" class="fas fa-times"></i></td></tr>`)
+        tipSum += truncateToDecimals(Number(event.target.value))
+        tipTotalElement.textContent = truncateToDecimals(tipSum).toFixed(2)
         let clearTipValue = document.getElementById('cleartips')
         clearTipValue.addEventListener('click', function() {
             tipSum -= Number(clearTipValue.parentNode.textContent)
