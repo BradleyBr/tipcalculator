@@ -22,16 +22,35 @@
         <div class="parentcontainer">
             <div class="content">
                 <!-- All the flex classes throughout the DOM are for keeping everything lined up with eachother -->
-                <div class="datatable">
+                <div class="datatable tipsection">
+                    <h3 class="tipheader">Tips Earned</h3>
+                    <h4>Old Moby</h4>
                     <div class="boxmargin bodyheader">
-                        <p class="flexleft tipsfieldname">Tips Earned</p>
-                        <input type="number" pattern="[0-9]*" id="tips" class="flexright specialmargin">
-                        <table id="tipnumbers">
-                            <tr>
-                                <td id="tipsum"></td>
-                            </tr>
-                        </table>
+                        <p class="flexleft tipsfieldname">Cash</p>
+                        <input type="number" id="oldcashtips" class="flexright specialmargin">
                     </div>
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Debit</p>
+                        <input type="number" id="olddebittips" class="flexright specialmargin">
+                    </div>
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Cash Takeout</p>
+                        <input type="number" id="oldcashtakeout" class="flexright specialmargin">
+                    </div>
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Debit Takeout</p>
+                        <input type="number" id="olddebittakeout" class="flexright specialmargin">
+                    </div>
+                    <h4>New Moby</h4>
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Cash</p>
+                        <input type="number" id="newcashtips" class="flexright specialmargin">
+                    </div>
+                    <div class="boxmargin bodyheader">
+                        <p class="flexleft">Debit</p>
+                        <input type="number" id="newdebittips" class="flexright specialmargin">
+                    </div>
+                    <p id="tiptotal"></p>
                 </div>
                 <div class="fronthouse">
                     <h2>Fronthouse staff</h2>
@@ -39,7 +58,7 @@
                         <div class="flexcolumn">
                             <div class="boxmargin">
                                 <p class="flexleft">Number of waitstaff working</p>
-                                <input type="number" pattern="[0-9]*" id="servers" class="flexright">
+                                <input type="number" id="servers" class="flexright">
                             </div>
                         </div>
                         
@@ -55,21 +74,21 @@
                             <!-- the boxmargin classes are for justifying the content to be at the edge of the container-->
                             <div class="boxmargin">
                                 <p class="flexleft">Number of Cooks Working</p>
-                                <input type="number" pattern="[0-9]*" id="cooks" class="flexright">      
+                                <input type="number" id="cooks" class="flexright">      
                             </div>
                             <div class="boxmargin">
                                 <p class="flexleft">Cooks included in dishwasher Tip Out</p> 
-                                <input type="number" pattern="[0-9]*" id="cooksdishtip" class="flexright">
+                                <input type="number" id="cooksdishtip" class="flexright">
                             </div>
                         </div>
                         <div class="flexcolumn offsetleft">
                             <div class="boxmargin">
                                 <p class="flexleft">Number of dishwashers</p>
-                                <input type="number" pattern="[0-9]*" id="dishwashers" class="flexright">
+                                <input type="number" id="dishwashers" class="flexright">
                             </div>
                             <div class="boxmargin">
                                 <p class="flexleft">Diswasher tipout percent</p>
-                                <input type="number" pattern="[0-9]*" id="dishtip" class="flexright" value="10">
+                                <input type="number" id="dishtip" class="flexright" value="10">
                             </div>   
                         </div>
                     </div>
@@ -77,6 +96,9 @@
                 <div class="outputcontainer">
                     <button id="stafftips">calculate</button>
                     <p id="tipoutput"></p>
+                    <p id="additionalfronttips"></p>
+                    <p id="additionalkitchentips"></p>
+                    <p id="additionaldishwashertips"></p>
                 </div>            
             </div>
         </div> 

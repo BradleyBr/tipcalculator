@@ -15,8 +15,12 @@ header {
     background-size: 100%;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     font-family: 'Eczar', serif;
+}
+h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 
 p {
@@ -62,7 +66,8 @@ table tr td {
 }
 
 .parentcontainer {
-    background-image: url("../mobybackground.jpg");
+    /* background-image: url("../mobybackground.jpg"); */
+    background-color: #41bbf3;
     min-height: 800px;
     background-size: auto;
     margin-left: auto;
@@ -89,8 +94,12 @@ table tr td {
     margin-bottom: 3rem;
 }
 
-#tips {
-    height: 1.5rem;
+.tipheader {
+    margin-bottom: 0.5rem;
+}
+
+#tiptotal {
+text-align: end;
 }
 
 .tipsfieldname {
@@ -124,6 +133,11 @@ table tr td {
 
 .datatable {
     width: 50rem;
+}
+
+.tipsection {
+    display: flex;
+    flex-direction: column;
 }
 
 .flexcontainer {
@@ -161,10 +175,11 @@ table tr td {
     top: 3rem;
 }
 
-/* font awesome edit */
+#additionalfronttips {
+    margin-top: 1rem;
+    margin-bottom: 0.7rem;
+}
 
-.fa-times {
-    color: rgba(255, 102, 0, 0.836);
-    font-size: 0.8rem;
-    margin-left: 0.4rem;
+#additionalkitchentips {
+    margin-bottom: 0.7rem;
 }

@@ -54,8 +54,13 @@
         width: 25rem;
     }
 
+    .parentcontainer {
+        min-height: 1300px;
+    }
+
     .content {
         width: 26rem;
+        min-height: 1100px;
     }
 }
 
@@ -66,7 +71,7 @@
 
     .content {
         width: 20rem;
-        min-height: 400px;
+        min-height: 1000px;
     }
 
     .datatable {
@@ -79,6 +84,7 @@
    
     .parentcontainer {
         padding-left: 1rem;
+        min-height: 1150px;
     }
 
     .kitchenstaff h2, .fronthouse h2 {
@@ -108,11 +114,13 @@
 
     .parentcontainer {
         padding-left: 0.4rem;
+        min-height: 1050px;
     }
 
     .content {
         width: 17rem;
         padding-top: 0.5rem;
+        min-height: 750px;
     }
 
     .content p {
